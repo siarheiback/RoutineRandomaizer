@@ -2,31 +2,52 @@ package com.finmanager.routinerandomaizer.ui.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.FragmentManagerNonConfig
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.finmanager.routinerandomaizer.R
+import com.finmanager.routinerandomaizer.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
     }
-
+    private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        //(activity as AppCompatActivity).setSupportActionBar(binding.mainToolbar)
+        setHasOptionsMenu(true)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        // TODO: Use the ViewModel
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_fragment_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+        //menu.getItem(0).isVisible = false
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.itemsList ->  findNavController().navigate(R.id.action_mainFragment_to_taskListFragment)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
