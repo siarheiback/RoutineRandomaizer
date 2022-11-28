@@ -3,4 +3,7 @@
     <string name="items_list">Список задач</string>
     <string name="main_message">Получить задачу</string>
     <string name="example">Помыть окна</string>
+    <string name="InputTask">Введите задачу…</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

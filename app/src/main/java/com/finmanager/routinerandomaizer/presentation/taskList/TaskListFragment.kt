@@ -1,4 +1,4 @@
-package com.finmanager.routinerandomaizer
+package com.finmanager.routinerandomaizer.presentation.taskList
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,15 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.finmanager.routinerandomaizer.databinding.FragmentTaskListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TaskListFragment : Fragment() {
 
     companion object {

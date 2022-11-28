@@ -1,4 +1,4 @@
-package com.finmanager.routinerandomaizer
+package com.finmanager.routinerandomaizer.presentation.taskList
 
 import androidx.lifecycle.ViewModel
 

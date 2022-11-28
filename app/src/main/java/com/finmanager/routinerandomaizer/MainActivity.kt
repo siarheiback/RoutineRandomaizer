@@ -2,9 +2,7 @@ package com.finmanager.routinerandomaizer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
 import com.finmanager.routinerandomaizer.databinding.ActivityMainBinding
-import com.finmanager.routinerandomaizer.ui.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

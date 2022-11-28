@@ -1,17 +1,15 @@
-package com.finmanager.routinerandomaizer.ui.main
+package com.finmanager.routinerandomaizer.presentation.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManagerNonConfig
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     companion object {

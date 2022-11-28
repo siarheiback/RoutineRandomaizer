@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.finmanager.routinerandomaizer.ui.main.MainFragment"
+        android:name="com.finmanager.routinerandomaizer.presentation.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -17,11 +17,25 @@
     </fragment>
     <fragment
         android:id="@+id/taskListFragment"
-        android:name="com.finmanager.routinerandomaizer.TaskListFragment"
+        android:name="com.finmanager.routinerandomaizer.presentation.taskList.TaskListFragment"
         android:label="fragment_task_list"
         tools:layout="@layout/fragment_task_list" >
         <action
             android:id="@+id/action_taskListFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_singleTaskFragment"
+            app:destination="@id/singleTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleTaskFragment"
+        android:name="com.finmanager.routinerandomaizer.SingleTaskFragment"
+        android:label="fragment_single_task"
+        tools:layout="@layout/fragment_single_task" >
+        <action
+            android:id="@+id/action_singleTaskFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment"
+            app:popUpTo="@id/taskListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
