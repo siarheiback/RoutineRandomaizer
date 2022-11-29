@@ -2,13 +2,12 @@ package com.finmanager.routinerandomaizer.presentation.taskList
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.FragmentTaskListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,14 +28,21 @@ class TaskListFragment : Fragment() {
         val navController = findNavController()
         val config = AppBarConfiguration(navController.graph)
         binding.ListToolbar.setupWithNavController(navController,config)
-
+        setHasOptionsMenu(true)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TaskListViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.addNewTask ->  findNavController().navigate(R.id.action_taskListFragment_to_singleTaskFragment)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

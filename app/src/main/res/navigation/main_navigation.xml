@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/singleTaskFragment"
-        android:name="com.finmanager.routinerandomaizer.SingleTaskFragment"
+        android:name="com.finmanager.routinerandomaizer.presentation.singleTask.SingleTaskFragment"
         android:label="fragment_single_task"
         tools:layout="@layout/fragment_single_task" >
         <action
