@@ -33,6 +33,7 @@ class SingleTaskFragment : Fragment() {
             )
             viewModel.newTask(newTask)
         }
+       
     }
 
 }

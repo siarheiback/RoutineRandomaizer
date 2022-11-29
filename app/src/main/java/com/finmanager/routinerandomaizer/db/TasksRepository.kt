@@ -10,7 +10,7 @@ class TasksRepository@Inject constructor(
     private val DAO: TasksDAO
     ) :TaskInterface{
 
-    override suspend fun readAllData(): LiveData<List<Task>> = DAO.readAllTasks()
+    override fun readAllData(): LiveData<List<Task>> = DAO.readAllTasks()
 
     override suspend fun addTask (task: Task){
         DAO.addTask(task)

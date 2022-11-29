@@ -8,17 +8,6 @@
     tools:context=".presentation.singleTask.SingleTaskFragment">
 
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/SingleTaskToolbar"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!--<com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.Material3.TextInputLayout.FilledBox"
@@ -31,12 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SingleTaskToolbar">
  </com.google.android.material.textfield.TextInputLayout> !-->
-        <EditText
-            android:id="@+id/TaskText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/InputTask" />
 
+
+    <EditText
+        android:id="@+id/TaskText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/InputTask"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/save_btn"
@@ -44,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/TaskText"
+        app:layout_constraintStart_toStartOf="@+id/TaskText"
+        app:layout_constraintTop_toBottomOf="@+id/TaskText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

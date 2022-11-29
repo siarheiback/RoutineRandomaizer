@@ -25,9 +25,6 @@ class TaskListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTaskListBinding.inflate(inflater, container, false)
-        val navController = findNavController()
-        val config = AppBarConfiguration(navController.graph)
-        binding.ListToolbar.setupWithNavController(navController,config)
         setHasOptionsMenu(true)
         return binding.root
     }
