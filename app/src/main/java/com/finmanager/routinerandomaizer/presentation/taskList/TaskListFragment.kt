@@ -4,35 +4,45 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.FragmentTaskListBinding
+import com.finmanager.routinerandomaizer.presentation.singleTask.SingleTaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TaskListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TaskListFragment()
-    }
     private lateinit var binding: FragmentTaskListBinding
-    private lateinit var viewModel: TaskListViewModel
+    private val viewModel by viewModels<TaskListViewModel> ( )
+    private val adapter: TaskListRecyclerAdapter by lazy { TaskListRecyclerAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTaskListBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val recyclerView = binding.TaskListRecycler
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.TaskListRecycler.adapter = adapter
+        viewModel.readAllData1.observe(viewLifecycleOwner) { list ->
+            adapter.setData(list)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.add_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

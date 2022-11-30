@@ -14,10 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SingleTaskViewModel@Inject constructor(
     private val createNewTask:CreateNewTaskUseCase,
-    private val LoadTasksList: LoadTasksListUseCase
 ):ViewModel() {
-
-    val readAllData = LoadTasksList.execute()
 
     fun newTask(task: Task){
         viewModelScope.launch(Dispatchers.IO){

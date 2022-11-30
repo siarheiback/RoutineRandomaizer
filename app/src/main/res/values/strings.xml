@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RoutineRandomaizer</string>
+    <string name="app_name">RoutineRandomizer</string>
     <string name="items_list">Список задач</string>
     <string name="main_message">Получить задачу</string>
     <string name="example">Помыть окна</string>
