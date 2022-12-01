@@ -1,17 +1,13 @@
 package com.finmanager.routinerandomaizer.presentation.taskList
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.FragmentTaskListBinding
-import com.finmanager.routinerandomaizer.presentation.singleTask.SingleTaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

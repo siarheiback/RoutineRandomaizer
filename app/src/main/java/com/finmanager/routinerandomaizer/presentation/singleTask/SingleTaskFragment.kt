@@ -25,6 +25,7 @@ class SingleTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.saveBtn.setOnClickListener(){
             val newTask = Task(
                 id = 0,
