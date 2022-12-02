@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.FragmentMainBinding
+import com.finmanager.routinerandomaizer.domain.models.Task
+import com.finmanager.routinerandomaizer.presentation.taskList.TaskListRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,13 +18,13 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
+    private val adapter: CurrentTasksRecyclerAdapter by lazy { CurrentTasksRecyclerAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -32,20 +35,36 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         viewModel.taskList.observe(viewLifecycleOwner){list->
+
+            adapter.setData(list)
+
             binding.randomizeBtn.setOnClickListener(){
                 viewModel.getTask(list)
             }
         }
-        viewModel.randomTask.observe(viewLifecycleOwner){
-            binding.message.text = it.name
+
+        viewModel.randomTask.observe(viewLifecycleOwner){task->
+            binding.message.text = task.name
+            binding.acceptBtn.setOnClickListener(){
+                viewModel.acceptTask(
+                    Task(
+                        id = task.id,
+                        name = task.name,
+                        description = "1"
+                    )
+                )
+            }
         }
+
+        val recyclerView = binding.CurrentTaskRecycler
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.CurrentTaskRecycler.adapter = adapter
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_fragment_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-
-        //menu.getItem(0).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

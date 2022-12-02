@@ -38,7 +38,7 @@ class CurrentTasksRecyclerAdapter : RecyclerView.Adapter<CurrentTasksRecyclerAda
     fun setData(data: List<Task>?) {
         this.singleTask.clear()
         if (data != null) {
-            this.singleTask.addAll(data)
+            this.singleTask.addAll(data.asSequence().filter { it.description=="1" }.toList())
         }
 
         notifyDataSetChanged()}

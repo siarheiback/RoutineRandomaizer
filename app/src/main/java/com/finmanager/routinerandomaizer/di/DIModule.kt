@@ -2,11 +2,13 @@ package com.finmanager.routinerandomaizer.di
 
 import android.content.Context
 import androidx.room.Room
-import com.finmanager.routinerandomaizer.data.randomizerImpl.Randomizer
+import com.finmanager.routinerandomaizer.data.Randomizer
+import com.finmanager.routinerandomaizer.data.TaskController
 import com.finmanager.routinerandomaizer.db.TaskDatabase
 import com.finmanager.routinerandomaizer.db.TaskDatabase.Companion.dbName
 import com.finmanager.routinerandomaizer.db.TasksDAO
 import com.finmanager.routinerandomaizer.db.TasksRepository
+import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.taskInterface.TaskInterface
 import dagger.Binds
@@ -34,6 +36,12 @@ abstract class DIModule {
     abstract fun bindsRandomizerInterface(
         RandomizerImpl: Randomizer
     ): RandomizerInterface
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindsTaskControlInterface(
+        TaskController: TaskController
+    ): TaskControlInterface
 
 }
 

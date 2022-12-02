@@ -31,6 +31,7 @@ class CurrentTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.CurrentTaskText.setText(viewModel.task.name)
+        binding.taskDescription.text = viewModel.task.description
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
