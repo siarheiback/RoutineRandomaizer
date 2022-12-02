@@ -12,9 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
 
@@ -23,7 +21,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        //(activity as AppCompatActivity).setSupportActionBar(binding.mainToolbar)
+
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -32,6 +30,15 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        viewModel.taskList.observe(viewLifecycleOwner){list->
+            binding.randomizeBtn.setOnClickListener(){
+                viewModel.getTask(list)
+            }
+        }
+        viewModel.randomTask.observe(viewLifecycleOwner){
+            binding.message.text = it.name
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -1,10 +1,8 @@
 package com.finmanager.routinerandomaizer.di
 
+import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.taskInterface.TaskInterface
-import com.finmanager.routinerandomaizer.domain.usecase.CreateNewTaskUseCase
-import com.finmanager.routinerandomaizer.domain.usecase.DeleteTaskUseCase
-import com.finmanager.routinerandomaizer.domain.usecase.LoadTasksListUseCase
-import com.finmanager.routinerandomaizer.domain.usecase.UpdateTaskUseCase
+import com.finmanager.routinerandomaizer.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,5 +43,13 @@ class UseCases {
         repository: TaskInterface
     ): UpdateTaskUseCase {
         return UpdateTaskUseCase(repository)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun  provideGetRandomTaskUseCase(
+        repository: RandomizerInterface
+    ): GetRandomTaskUseCase {
+        return GetRandomTaskUseCase(repository)
     }
 }
