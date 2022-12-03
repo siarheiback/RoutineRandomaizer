@@ -36,4 +36,12 @@ class MainViewModel @Inject constructor(
             AcceptTask.execute(task)
         }
     }
+
+    fun buttonController(state:Boolean){
+        when (state){
+            true->{}
+            false->{}
+            null->{}
+        }
+    }
 }

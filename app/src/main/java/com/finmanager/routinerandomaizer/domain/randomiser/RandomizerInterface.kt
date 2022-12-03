@@ -6,4 +6,5 @@ interface RandomizerInterface {
 
     suspend fun getRandomTask(list: List<Task>?):Task?
 
+    suspend fun isListFull(list:List<Task>?):Boolean
 }

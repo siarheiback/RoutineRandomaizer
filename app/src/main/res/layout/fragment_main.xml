@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 -->
+
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
@@ -28,8 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CurrentTaskRecycler"
-        app:layout_constraintVertical_bias="0.626" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.233" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/randomizeBtn"
@@ -52,9 +53,12 @@
         android:id="@+id/CurrentTaskRecycler"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="3"
         tools:listitem="@layout/current_task_card" />
 
@@ -77,6 +81,20 @@
         app:layout_constraintBottom_toTopOf="@+id/randomizeBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message" />
+
+ <androidx.constraintlayout.widget.Group
+     android:id="@+id/group"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:visibility="gone"
+     app:constraint_referenced_ids="declineBtn,acceptBtn" />
+
+ <androidx.constraintlayout.widget.Guideline
+     android:id="@+id/guideline2"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     app:layout_constraintGuide_begin="289dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.finmanager.routinerandomaizer.di
 
+import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.taskInterface.TaskInterface
 import com.finmanager.routinerandomaizer.domain.usecase.*
@@ -51,5 +52,13 @@ class UseCases {
         repository: RandomizerInterface
     ): GetRandomTaskUseCase {
         return GetRandomTaskUseCase(repository)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun  provideCompleteTaskUseCase(
+        repository: TaskControlInterface
+    ): CompleteTaskUseCase {
+        return CompleteTaskUseCase(repository)
     }
 }

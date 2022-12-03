@@ -26,6 +26,8 @@ class TaskController@Inject constructor(
     }
 
     override suspend fun completeTask(task: Task) {
-        TODO("Not yet implemented")
+        repository.updateTask(task)
     }
+
+
 }

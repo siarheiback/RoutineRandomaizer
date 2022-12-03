@@ -11,6 +11,8 @@ import com.finmanager.routinerandomaizer.db.TasksRepository
 import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.taskInterface.TaskInterface
+import com.finmanager.routinerandomaizer.domain.usecase.CompleteTaskUseCase
+import com.finmanager.routinerandomaizer.presentation.main.CurrentTasksRecyclerAdapter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,11 +27,6 @@ import javax.inject.Singleton
 @InstallIn(ViewModelComponent::class)
 abstract class DIModule {
 
-    @Binds
-    @ViewModelScoped
-    abstract fun  bindsTaskInterface(
-        TaskImpl: TasksRepository
-    ): TaskInterface
 
     @Binds
     @ViewModelScoped
@@ -37,11 +34,27 @@ abstract class DIModule {
         RandomizerImpl: Randomizer
     ): RandomizerInterface
 
+
+
+}
+
+/**
+ * Singleton course use in fragment
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class TaskModule {
     @Binds
-    @ViewModelScoped
+    @Singleton
     abstract fun bindsTaskControlInterface(
         TaskController: TaskController
     ): TaskControlInterface
+
+    @Binds
+    @Singleton
+    abstract fun  bindsTaskInterface(
+        TaskImpl: TasksRepository
+    ): TaskInterface
 
 }
 
@@ -49,7 +62,9 @@ abstract class DIModule {
 @Module
 class DatabaseModule {
 
+
     @Provides
+    @Singleton
     fun provideTasksDao(appDatabase: TaskDatabase): TasksDAO {
         return appDatabase.tasksDao()
     }
@@ -63,4 +78,10 @@ class DatabaseModule {
             dbName
         ).build()
     }
+
+    @Provides
+    @Singleton
+    fun provideCurrentTasksRecyclerAdapter(CompleteTaskUseCase:CompleteTaskUseCase,
+                                           @ApplicationContext appContext: Context):
+            CurrentTasksRecyclerAdapter = CurrentTasksRecyclerAdapter(CompleteTaskUseCase,appContext)
 }

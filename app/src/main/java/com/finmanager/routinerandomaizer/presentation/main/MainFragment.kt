@@ -11,14 +11,18 @@ import com.finmanager.routinerandomaizer.databinding.FragmentMainBinding
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.presentation.taskList.TaskListRecyclerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
-    private val adapter: CurrentTasksRecyclerAdapter by lazy { CurrentTasksRecyclerAdapter() }
+    @Inject lateinit var  adapter: CurrentTasksRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,19 +44,16 @@ class MainFragment : Fragment() {
 
             binding.randomizeBtn.setOnClickListener(){
                 viewModel.getTask(list)
+                binding.group.visibility = View.VISIBLE
             }
         }
 
         viewModel.randomTask.observe(viewLifecycleOwner){task->
             binding.message.text = task.name
             binding.acceptBtn.setOnClickListener(){
-                viewModel.acceptTask(
-                    Task(
-                        id = task.id,
-                        name = task.name,
-                        description = "1"
-                    )
-                )
+                viewModel.acceptTask(task)
+                binding.message.text = getString(R.string.main_message)
+                binding.group.visibility = View.GONE
             }
         }
 

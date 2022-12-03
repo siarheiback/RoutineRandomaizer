@@ -13,14 +13,18 @@ android {
     buildFeatures {
         viewBinding true
     }
-
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
     defaultConfig {
         applicationId "com.finmanager.routinerandomaizer"
         minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -40,8 +44,11 @@ android {
 }
 
 dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     def nav_version = "2.5.3"
     def room_version = "2.4.3"
+    def lottieVersion = "2.8.0"
 
 
     // Room
@@ -50,7 +57,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
-
+    //Animation
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 
     // Navigation component
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

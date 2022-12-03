@@ -9,6 +9,12 @@ class AcceptTaskUseCase@Inject constructor(
 ) {
 
     suspend fun execute(task: Task){
-        TaskController.acceptTask(task)
+        TaskController.acceptTask(
+                Task(
+                    id = task.id,
+                    name = task.name,
+                    description = "1"
+                )
+        )
     }
 }
