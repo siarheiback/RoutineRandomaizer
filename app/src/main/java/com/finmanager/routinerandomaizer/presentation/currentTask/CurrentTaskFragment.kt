@@ -7,10 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.FragmentCurrentTaskBinding
-import com.finmanager.routinerandomaizer.databinding.FragmentSingleTaskBinding
-import com.finmanager.routinerandomaizer.presentation.singleTask.SingleTaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 @AndroidEntryPoint
 class CurrentTaskFragment : Fragment() {

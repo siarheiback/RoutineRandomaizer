@@ -1,9 +1,11 @@
 package com.finmanager.routinerandomaizer.presentation.main
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.finmanager.routinerandomaizer.VisibilityController
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.usecase.AcceptTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.GetRandomTaskUseCase
@@ -20,6 +22,9 @@ class MainViewModel @Inject constructor(
     private val AcceptTask: AcceptTaskUseCase
 ) : ViewModel() {
 
+    private var _state = MutableLiveData<VisibilityController>()
+    val state: LiveData<VisibilityController> = _state
+
     private var _randomTask = MutableLiveData<Task>()
     val randomTask: LiveData<Task> = _randomTask
 
@@ -34,14 +39,6 @@ class MainViewModel @Inject constructor(
     fun acceptTask(task: Task){
         viewModelScope.launch(Dispatchers.IO){
             AcceptTask.execute(task)
-        }
-    }
-
-    fun buttonController(state:Boolean){
-        when (state){
-            true->{}
-            false->{}
-            null->{}
         }
     }
 }

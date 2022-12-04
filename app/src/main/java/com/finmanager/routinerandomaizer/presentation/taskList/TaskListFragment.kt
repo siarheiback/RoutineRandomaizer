@@ -1,21 +1,29 @@
 package com.finmanager.routinerandomaizer.presentation.taskList
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.finmanager.routinerandomaizer.R
+import com.finmanager.routinerandomaizer.data.SwipeController
 import com.finmanager.routinerandomaizer.databinding.FragmentTaskListBinding
+import com.finmanager.routinerandomaizer.domain.models.Task
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TaskListFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskListBinding
     private val viewModel by viewModels<TaskListViewModel> ( )
-    private val adapter: TaskListRecyclerAdapter by lazy { TaskListRecyclerAdapter() }
+    @Inject lateinit var adapter: TaskListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,26 +34,28 @@ class TaskListFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = binding.TaskListRecycler
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.TaskListRecycler.adapter = adapter
-        viewModel.readAllData1.observe(viewLifecycleOwner) { list ->
-            adapter.setData(list)
+
+        viewModel.readAllData.observe(viewLifecycleOwner) { list ->
+            adapter.differ.submitList(list)
+        }
+
+        binding.AddNewTaskBtn.setOnClickListener(){
+            viewModel.newTask(
+                Task(
+                    0,
+                    binding.NewTaskText.text.toString(),
+                    null
+                )
+            )
+            binding.NewTaskText.text = null
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.addNewTask ->  findNavController().navigate(R.id.action_taskListFragment_to_singleTaskFragment)
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
 }

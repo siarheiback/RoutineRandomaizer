@@ -12,7 +12,12 @@ import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.taskInterface.TaskInterface
 import com.finmanager.routinerandomaizer.domain.usecase.CompleteTaskUseCase
+import com.finmanager.routinerandomaizer.domain.usecase.CreateNewTaskUseCase
+import com.finmanager.routinerandomaizer.domain.usecase.DeleteTaskUseCase
 import com.finmanager.routinerandomaizer.presentation.main.CurrentTasksRecyclerAdapter
+
+import com.finmanager.routinerandomaizer.presentation.taskList.TaskListRecyclerAdapter
+
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -84,4 +89,12 @@ class DatabaseModule {
     fun provideCurrentTasksRecyclerAdapter(CompleteTaskUseCase:CompleteTaskUseCase,
                                            @ApplicationContext appContext: Context):
             CurrentTasksRecyclerAdapter = CurrentTasksRecyclerAdapter(CompleteTaskUseCase,appContext)
+
+    @Provides
+    @Singleton
+    fun provideTaskListRecyclerAdapter(DeleteTaskUseCase: DeleteTaskUseCase,
+                                       CreateNewTask: CreateNewTaskUseCase,
+                                       @ApplicationContext appContext: Context):
+            TaskListRecyclerAdapter =
+        TaskListRecyclerAdapter(DeleteTaskUseCase,CreateNewTask, appContext)
 }

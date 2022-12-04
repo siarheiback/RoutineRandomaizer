@@ -47,8 +47,8 @@ class CurrentTasksRecyclerAdapter @Inject constructor(
                 CoroutineScope(Dispatchers.IO).launch {
                     delay(800)
                     CompleteTask.execute(currentItem)
-                    buttonView.isChecked = false
                 }
+                buttonView.isChecked = false
                 Toast.makeText(context,isChecked.toString(),Toast.LENGTH_SHORT).show()
             }
         }
