@@ -25,11 +25,11 @@ class TaskListRecyclerAdapter @Inject constructor(
 
 
         class ViewHolder(val binding: TaskCardBinding) : RecyclerView.ViewHolder(binding.root) {
-            fun setData(item:Task){
+            fun setData(item:Task, id: Int){
                 binding.apply {
                     TaskName.text = item.name.toString()
+                    position.text = id.toString()
                 }
-
             }
         }
 
@@ -44,8 +44,7 @@ class TaskListRecyclerAdapter @Inject constructor(
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val currentItem = differ.currentList[position]
-            holder.binding.position.text = holder.adapterPosition.toString()
-            holder.setData(currentItem)
+            holder.setData(currentItem, position)
             holder.binding.imageButton.setOnClickListener(){
                 CoroutineScope(Dispatchers.IO).launch {
                     DeleteTask.execute(currentItem )
