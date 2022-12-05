@@ -3,10 +3,12 @@ package com.finmanager.routinerandomaizer.presentation.taskList
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.TaskCardBinding
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.usecase.CreateNewTaskUseCase
@@ -25,10 +27,16 @@ class TaskListRecyclerAdapter @Inject constructor(
 
 
         class ViewHolder(val binding: TaskCardBinding) : RecyclerView.ViewHolder(binding.root) {
+            @SuppressLint("ResourceAsColor")
             fun setData(item:Task, id: Int){
                 binding.apply {
                     TaskName.text = item.name.toString()
                     position.text = id.toString()
+                    if(item.description!=null){
+                        TaskBackground.setBackgroundColor(R.color.purple_200)
+                        buttons.visibility = View.GONE
+                    }
+
                 }
             }
         }
@@ -45,7 +53,7 @@ class TaskListRecyclerAdapter @Inject constructor(
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val currentItem = differ.currentList[position]
             holder.setData(currentItem, position)
-            holder.binding.imageButton.setOnClickListener(){
+            holder.binding.deleteButton.setOnClickListener(){
                 CoroutineScope(Dispatchers.IO).launch {
                     DeleteTask.execute(currentItem )
                 }

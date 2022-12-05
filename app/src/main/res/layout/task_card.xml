@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/TaskBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     >
@@ -35,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/deleteButton"
         android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,9 +52,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        app:layout_constraintTop_toTopOf="@+id/deleteButton"
         app:srcCompat="@drawable/ic_baseline_edit_24" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editButton,deleteButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

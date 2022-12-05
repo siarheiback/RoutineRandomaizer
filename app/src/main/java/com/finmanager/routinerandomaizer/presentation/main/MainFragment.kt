@@ -3,6 +3,7 @@ package com.finmanager.routinerandomaizer.presentation.main
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
-    @Inject lateinit var  adapter: CurrentTasksRecyclerAdapter
+    @Inject lateinit var adapter: CurrentTasksRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,16 +45,19 @@ class MainFragment : Fragment() {
 
             binding.randomizeBtn.setOnClickListener(){
                 viewModel.getTask(list)
-                binding.group.visibility = View.VISIBLE
+
             }
         }
 
         viewModel.randomTask.observe(viewLifecycleOwner){task->
-            binding.message.text = task.name
+
+                viewModel.controller(binding.group, binding.message, task)
+
+
             binding.acceptBtn.setOnClickListener(){
-                viewModel.acceptTask(task)
-                binding.message.text = getString(R.string.main_message)
-                binding.group.visibility = View.GONE
+                if (task != null) {
+                    viewModel.acceptTask(task)
+                }
             }
         }
 

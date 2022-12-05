@@ -1,11 +1,12 @@
 package com.finmanager.routinerandomaizer.presentation.main
 
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.finmanager.routinerandomaizer.VisibilityController
+import com.finmanager.routinerandomaizer.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.usecase.AcceptTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.GetRandomTaskUseCase
@@ -22,11 +23,11 @@ class MainViewModel @Inject constructor(
     private val AcceptTask: AcceptTaskUseCase
 ) : ViewModel() {
 
-    private var _state = MutableLiveData<VisibilityController>()
-    val state: LiveData<VisibilityController> = _state
+    private var _state = MutableLiveData<TaskState>()
+    val state: LiveData<TaskState> = _state
 
-    private var _randomTask = MutableLiveData<Task>()
-    val randomTask: LiveData<Task> = _randomTask
+    private var _randomTask = MutableLiveData<TaskState?>()
+    val randomTask: LiveData<TaskState?> = _randomTask
 
     var taskList = LoadTasksList.execute()
 
@@ -36,9 +37,32 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun acceptTask(task: Task){
+    fun acceptTask(task: TaskState){
         viewModelScope.launch(Dispatchers.IO){
             AcceptTask.execute(task)
+            _randomTask.postValue(null)
+        }
+    }
+
+    fun controller(view:View, text:TextView, task: TaskState?){
+        when(task){
+            is TaskState.Active -> {
+                view.visibility = View.VISIBLE
+                text.text = task.msg.name.toString()
+            }
+            is TaskState.Inactive ->{
+                view.visibility = View.GONE
+            }
+            is TaskState.ToMuch ->{
+                view.visibility = View.GONE
+                text.text= task.msg.name.toString()
+            }
+            is TaskState.NoTasks->{}
+
+            else -> {
+                view.visibility = View.GONE
+                text.text= "Получить задачу"
+            }
         }
     }
 }

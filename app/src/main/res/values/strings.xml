@@ -8,6 +8,7 @@
     <string name="AddNewTask">Добавить новую задачу</string>
     <string name="Accept">Принять</string>
     <string name="Decline">Отклонить</string>
+    <string name="title">Текущие задачи:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="deleteTask">Удалить</string>

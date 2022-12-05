@@ -54,11 +54,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="3"
         tools:listitem="@layout/current_task_card" />
 
@@ -82,12 +80,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/message" />
 
- <androidx.constraintlayout.widget.Group
-     android:id="@+id/group"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:visibility="gone"
-     app:constraint_referenced_ids="declineBtn,acceptBtn" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="declineBtn,acceptBtn" />
 
  <androidx.constraintlayout.widget.Guideline
      android:id="@+id/guideline2"
