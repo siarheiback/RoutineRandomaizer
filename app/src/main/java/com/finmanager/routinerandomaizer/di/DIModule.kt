@@ -15,6 +15,7 @@ import com.finmanager.routinerandomaizer.domain.usecase.CompleteTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.CreateNewTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.DeleteTaskUseCase
 import com.finmanager.routinerandomaizer.presentation.main.CurrentTasksRecyclerAdapter
+import com.finmanager.routinerandomaizer.presentation.main.TaskActionListener
 
 import com.finmanager.routinerandomaizer.presentation.taskList.TaskListRecyclerAdapter
 
@@ -84,17 +85,4 @@ class DatabaseModule {
         ).build()
     }
 
-    @Provides
-    @Singleton
-    fun provideCurrentTasksRecyclerAdapter(CompleteTaskUseCase:CompleteTaskUseCase,
-                                           @ApplicationContext appContext: Context):
-            CurrentTasksRecyclerAdapter = CurrentTasksRecyclerAdapter(CompleteTaskUseCase,appContext)
-
-    @Provides
-    @Singleton
-    fun provideTaskListRecyclerAdapter(DeleteTaskUseCase: DeleteTaskUseCase,
-                                       CreateNewTask: CreateNewTaskUseCase,
-                                       @ApplicationContext appContext: Context):
-            TaskListRecyclerAdapter =
-        TaskListRecyclerAdapter(DeleteTaskUseCase,CreateNewTask, appContext)
 }

@@ -3,10 +3,14 @@ package com.finmanager.routinerandomaizer.presentation.main
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.finmanager.routinerandomaizer.R
 import com.finmanager.routinerandomaizer.databinding.CurrentTaskCardBinding
 import com.finmanager.routinerandomaizer.databinding.TaskCardBinding
 import com.finmanager.routinerandomaizer.domain.models.Task
@@ -22,48 +26,57 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 
-class CurrentTasksRecyclerAdapter @Inject constructor(
-    private val CompleteTask:CompleteTaskUseCase,
-    @ApplicationContext private val context: Context
-) : RecyclerView.Adapter<CurrentTasksRecyclerAdapter.ViewHolder>() {
+interface TaskActionListener{
+    fun completeTask(task: Task)
+}
 
-    private var singleTask = mutableListOf<Task>()
+class CurrentTasksRecyclerAdapter (
+    private val taskActionListener:TaskActionListener
+) : RecyclerView.Adapter<CurrentTasksRecyclerAdapter.ViewHolder>(), View.OnClickListener {
 
-    class ViewHolder(val binding: CurrentTaskCardBinding) : RecyclerView.ViewHolder(binding.root) {
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            CurrentTaskCardBinding.inflate(
-                LayoutInflater.from(parent.context),
-            parent, false))
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = singleTask[position]
-        holder.binding.CurrentTaskName.text = currentItem.name
-        holder.binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked   ->
-            if (isChecked) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    delay(800)
-                    CompleteTask.execute(currentItem)
-                }
-                buttonView.isChecked = false
-                Toast.makeText(context,isChecked.toString(),Toast.LENGTH_SHORT).show()
+    class ViewHolder(private val binding: CurrentTaskCardBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun setData(item:Task){
+            binding.apply {
+                CurrentTaskName.text = item.name.toString()
+                itemView.tag = item
+                checkBox.tag = item
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return singleTask.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = CurrentTaskCardBinding.inflate(inflater, parent, false)
+        binding.checkBox.setOnClickListener(this)
+        return ViewHolder(binding)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(data: List<Task>?) {
-        this.singleTask.clear()
-        if (data != null) {
-            this.singleTask.addAll(data.asSequence().filter { it.description=="1" }.toList())
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setData(differ.currentList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+    override fun onClick(v: View) {
+        val task = v.tag as Task
+            taskActionListener.completeTask(task)
+    }
+
+
+    private val differCallback = object : DiffUtil.ItemCallback<Task>() {
+
+        override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        notifyDataSetChanged()}
+        override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+            return oldItem == newItem
+        }
+    }
+    val differ= AsyncListDiffer(this,differCallback )
+
+
 }
+

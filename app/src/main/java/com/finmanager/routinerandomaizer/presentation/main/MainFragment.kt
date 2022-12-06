@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private lateinit var viewModel: MainViewModel
-    @Inject lateinit var adapter: CurrentTasksRecyclerAdapter
+    private lateinit var adapter: CurrentTasksRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,19 +39,26 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        viewModel.taskList.observe(viewLifecycleOwner){list->
+        adapter = CurrentTasksRecyclerAdapter(object : TaskActionListener{
+            override fun completeTask(task: Task) {
+                viewModel.completeTask(task)
+            }
 
-            adapter.setData(list)
+        }
+        )
+
+        viewModel.taskList.observe(viewLifecycleOwner){list->
+            val activeTasksList = list.filter { it.description=="1" }
+            adapter.differ.submitList(activeTasksList)
 
             binding.randomizeBtn.setOnClickListener(){
                 viewModel.getTask(list)
-
             }
         }
 
         viewModel.randomTask.observe(viewLifecycleOwner){task->
 
-                viewModel.controller(binding.group, binding.message, task)
+            viewModel.controller(binding.group, binding.message, task)
 
 
             binding.acceptBtn.setOnClickListener(){

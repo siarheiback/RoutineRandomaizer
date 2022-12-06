@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.finmanager.routinerandomaizer.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.usecase.AcceptTaskUseCase
+import com.finmanager.routinerandomaizer.domain.usecase.CompleteTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.GetRandomTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.LoadTasksListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val GetRandomTask: GetRandomTaskUseCase,
     private val LoadTasksList: LoadTasksListUseCase,
-    private val AcceptTask: AcceptTaskUseCase
+    private val AcceptTask: AcceptTaskUseCase,
+    private val CompleteTask: CompleteTaskUseCase
 ) : ViewModel() {
 
     private var _state = MutableLiveData<TaskState>()
@@ -41,6 +43,12 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO){
             AcceptTask.execute(task)
             _randomTask.postValue(null)
+        }
+    }
+
+    fun completeTask(task: Task){
+        viewModelScope.launch(Dispatchers.IO){
+            CompleteTask.execute(task)
         }
     }
 

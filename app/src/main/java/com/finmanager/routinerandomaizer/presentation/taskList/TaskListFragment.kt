@@ -23,7 +23,7 @@ class TaskListFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskListBinding
     private val viewModel by viewModels<TaskListViewModel> ( )
-    @Inject lateinit var adapter: TaskListRecyclerAdapter
+    private lateinit var adapter: TaskListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +37,14 @@ class TaskListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = TaskListRecyclerAdapter(object :TaskListActionListener{
+            override fun deleteTask(task: Task) {
+                viewModel.deleteTask(task)
+                Toast.makeText(requireContext(),task.name,Toast.LENGTH_SHORT).show()
+            }
+        }
+        )
         val recyclerView = binding.TaskListRecycler
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.TaskListRecycler.adapter = adapter
