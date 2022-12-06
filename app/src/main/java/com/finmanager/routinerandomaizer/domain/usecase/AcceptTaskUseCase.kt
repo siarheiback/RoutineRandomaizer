@@ -1,6 +1,5 @@
 package com.finmanager.routinerandomaizer.domain.usecase
 
-import android.view.View
 import com.finmanager.routinerandomaizer.TaskState
 import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.models.Task
@@ -12,7 +11,7 @@ class AcceptTaskUseCase@Inject constructor(
 
     suspend fun execute(task: TaskState){
         when(task){
-            is TaskState.Active ->{
+            is TaskState.Randomised ->{
                 TaskController.acceptTask(
                     Task(
                         id = task.msg.id,

@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.finmanager.routinerandomaizer.db.TaskDatabase.Companion.dbName
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 
 @Parcelize
@@ -13,5 +14,9 @@ data class Task(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
     val name: String?,
-    var description:String?
+    val description:String?,
+   /* val isSleeping:Boolean?,
+    val period:Char?,
+    val sleepDate: Date?*/
 ): Parcelable
+

@@ -54,7 +54,7 @@ class MainViewModel @Inject constructor(
 
     fun controller(view:View, text:TextView, task: TaskState?){
         when(task){
-            is TaskState.Active -> {
+            is TaskState.Randomised -> {
                 view.visibility = View.VISIBLE
                 text.text = task.msg.name.toString()
             }

@@ -39,7 +39,7 @@ class ExampleUnitTest {
         // Context of the app under test.
 
         val isFull = runBlocking { Randomizer().isListFull(null) }
-        assertEquals(isFull, null)
+        assertEquals(isFull, false)
     }
 
     @Test
