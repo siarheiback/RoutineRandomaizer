@@ -14,9 +14,12 @@ class CompleteTaskUseCase @Inject constructor(
             Task(
                 id = task.id,
                 name = task.name,
-                description = null
-            )
+                description = null,
+                isSleeping = false,
+                period = 1,
+                sleepDate = null)
         )
+
     }
 
 }

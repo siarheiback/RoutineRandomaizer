@@ -48,7 +48,7 @@ class MainFragment : Fragment() {
         )
 
         viewModel.taskList.observe(viewLifecycleOwner){list->
-            val activeTasksList = list.filter { it.description=="1" }
+            val activeTasksList = list.filter { it.isActive }
             adapter.differ.submitList(activeTasksList)
 
             binding.randomizeBtn.setOnClickListener(){

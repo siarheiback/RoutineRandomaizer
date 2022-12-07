@@ -55,11 +55,13 @@ class TaskListFragment : Fragment() {
 
         binding.AddNewTaskBtn.setOnClickListener(){
             viewModel.newTask(
-                Task(
-                    0,
-                    binding.NewTaskText.text.toString(),
-                    null
-                )
+                Task(id = 0,
+                    name = binding.NewTaskText.text.toString(),
+                    description = null,
+                    isSleeping = false,
+                    isActive = false,
+                    period = 1,
+                    sleepDate = null)
             )
             binding.NewTaskText.text = null
         }

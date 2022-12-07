@@ -9,6 +9,8 @@
     <string name="Accept">Принять</string>
     <string name="Decline">Отклонить</string>
     <string name="title">Текущие задачи:</string>
+    <string name="noTasks">У вас нет доступных задач</string>
+    <string name="TooMushTasks">"У вас слишком много активных задач"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="deleteTask">Удалить</string>
