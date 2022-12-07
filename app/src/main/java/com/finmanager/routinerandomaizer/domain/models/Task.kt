@@ -18,6 +18,7 @@ data class Task(
     val isSleeping:Boolean = false,
     val isActive:Boolean = false,
     val period:Short?,
-    val sleepDate: String?
+    val sleepDate: String?,
+    val wakeUpDate: String?
 ): Parcelable
 

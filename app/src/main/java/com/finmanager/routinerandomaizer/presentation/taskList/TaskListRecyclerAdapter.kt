@@ -39,7 +39,8 @@ class TaskListRecyclerAdapter @Inject constructor(
                     position.text = id.toString()
                     deleteButton.tag = item
                     editButton.tag = item
-                    if(item.description!=null){
+                    textView.text = item.sleepDate.toString()
+                    if(item.isActive||item.isSleeping){
                         TaskBackground.setBackgroundColor(R.color.purple_200)
                         buttons.visibility = View.GONE
                         itemView.tag = item

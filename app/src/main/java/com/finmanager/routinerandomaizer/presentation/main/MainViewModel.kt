@@ -61,13 +61,13 @@ class MainViewModel @Inject constructor(
             is TaskState.Inactive ->{
                 view.visibility = View.GONE
             }
-            is TaskState.ToMuch ->{
+            is TaskState.TooMuch ->{
                 view.visibility = View.GONE
-                text.text= task.msg.name.toString()
+                text.text= task.getTask().name
             }
             is TaskState.NoTasks->{
                 view.visibility = View.GONE
-                text.text= task.msg.name.toString()
+                text.text= task.getTask().name
             }
 
             else -> {

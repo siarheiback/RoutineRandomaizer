@@ -45,9 +45,7 @@ class ExampleUnitTest {
     @Test
     fun getNoTask() {
         // Context of the app under test.
-        val testTask = TaskState.NoTasks(
-            Task(0,"У вас нет доступных задач", null)
-        )
+        val testTask = TaskState.NoTasks
         val task = runBlocking { Randomizer().getRandomTask(null) }
         assertEquals(task, testTask)
     }
@@ -56,9 +54,7 @@ class ExampleUnitTest {
     @Test
     fun getTooMuchTasks() {
         // Context of the app under test.
-        val testTask = TaskState.ToMuch(
-            Task(0,"У вас слишком много активных задач", null)
-        )
+        val testTask = TaskState.TooMuch
         val task = runBlocking { Randomizer().getRandomTask(taskList) }
         assertEquals(task, testTask)
     }

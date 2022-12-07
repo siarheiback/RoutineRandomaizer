@@ -1,5 +1,6 @@
 package com.finmanager.routinerandomaizer.di
 
+import com.finmanager.routinerandomaizer.data.DateUtilInterface
 import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.taskInterface.TaskInterface
@@ -57,8 +58,9 @@ class UseCases {
     @Provides
     @ViewModelScoped
     fun  provideCompleteTaskUseCase(
-        repository: TaskControlInterface
+        repository: TaskControlInterface,
+        dateUtil: DateUtilInterface
     ): CompleteTaskUseCase {
-        return CompleteTaskUseCase(repository)
+        return CompleteTaskUseCase(repository, dateUtil)
     }
 }

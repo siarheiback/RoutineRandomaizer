@@ -61,7 +61,8 @@ class TaskListFragment : Fragment() {
                     isSleeping = false,
                     isActive = false,
                     period = 1,
-                    sleepDate = null)
+                    sleepDate = null,
+                    wakeUpDate = null)
             )
             binding.NewTaskText.text = null
         }

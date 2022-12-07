@@ -2,6 +2,8 @@ package com.finmanager.routinerandomaizer.di
 
 import android.content.Context
 import androidx.room.Room
+import com.finmanager.routinerandomaizer.data.DateUtil
+import com.finmanager.routinerandomaizer.data.DateUtilInterface
 import com.finmanager.routinerandomaizer.data.Randomizer
 import com.finmanager.routinerandomaizer.data.TaskController
 import com.finmanager.routinerandomaizer.db.TaskDatabase
@@ -33,31 +35,26 @@ import javax.inject.Singleton
 @InstallIn(ViewModelComponent::class)
 abstract class DIModule {
 
-
     @Binds
     @ViewModelScoped
     abstract fun bindsRandomizerInterface(
         RandomizerImpl: Randomizer
     ): RandomizerInterface
 
-
-
-}
-
-/**
- * Singleton course use in fragment
- */
-@Module
-@InstallIn(SingletonComponent::class)
-abstract class TaskModule {
     @Binds
-    @Singleton
+    @ViewModelScoped
+    abstract fun bindsDateUtilInterface(
+        DateUtil: DateUtil
+    ): DateUtilInterface
+
+    @Binds
+    @ViewModelScoped
     abstract fun bindsTaskControlInterface(
         TaskController: TaskController
     ): TaskControlInterface
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun  bindsTaskInterface(
         TaskImpl: TasksRepository
     ): TaskInterface
