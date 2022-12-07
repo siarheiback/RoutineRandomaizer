@@ -19,7 +19,7 @@ class ExampleUnitTest {
     private val taskList = listOf<Task>(
         Task(0, "1", "1"),
         Task(1, "1", "1"),
-        Task(2, "1", "0"),
+        Task(2, "1", "1"),
         Task(4, "1", "0"),
         Task(5, "1", "0"),
         Task(6, "1", "0"),
@@ -48,8 +48,11 @@ class ExampleUnitTest {
         val testTask = TaskState.NoTasks(
             Task(0,"У вас нет доступных задач", null)
         )
-        val task = runBlocking { Randomizer().getRandomTask(null) }
-        assertEquals(task, testTask)
+        when(val task = runBlocking { Randomizer().getRandomTask(null) }){
+            is TaskState.Randomised-> assertEquals(task.toString(), testTask)
+            else -> {}
+        }
+
     }
 
 
