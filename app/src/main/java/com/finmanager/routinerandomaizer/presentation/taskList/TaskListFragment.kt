@@ -38,6 +38,13 @@ class TaskListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.state.observe(viewLifecycleOwner){
+            if (it){
+                binding.progressBar.visibility = View.VISIBLE
+            }else{
+                binding.progressBar.visibility = View.GONE
+            }
+        }
         adapter = TaskListRecyclerAdapter(object :TaskListActionListener{
             override fun deleteTask(task: Task) {
                 viewModel.deleteTask(task)
@@ -54,16 +61,17 @@ class TaskListFragment : Fragment() {
         }
 
         binding.AddNewTaskBtn.setOnClickListener(){
-            viewModel.newTask(
-                Task(id = 0,
-                    name = binding.NewTaskText.text.toString(),
-                    description = null,
-                    isSleeping = false,
-                    isActive = false,
-                    period = 1,
-                    sleepDate = null,
-                    wakeUpDate = null)
-            )
+            viewModel.create1000sleepingTasks()
+//            viewModel.newTask(
+//                Task(id = 0,
+//                    name = binding.NewTaskText.text.toString(),
+//                    description = null,
+//                    isSleeping = false,
+//                    isActive = false,
+//                    period = 1,
+//                    sleepDate = null,
+//                    wakeUpDate = null)
+//            )
             binding.NewTaskText.text = null
         }
     }

@@ -14,15 +14,10 @@ class TaskController@Inject constructor(
 ):TaskControlInterface {
 
 
-
-
-
     override suspend fun wakeUpTask(list:List<Task>?) {
-
-     /*   list?.filter { it.isSleeping }?.forEachIndexed { _, task ->
+        list?.filter { it.isSleeping }?.forEachIndexed { _, task ->
             if(task.sleepDate!=null && task.wakeUpDate!=null){
-                dateUtil.toWake(task.sleepDate,task.wakeUpDate)
-                if(dateutil(task.sleepDate).convertToDate() < task.wakeUpDate.convertToDate()){
+                if(dateUtil.toWake(task)){
                     repository.updateTask(
                         Task(
                             id =  task.id,
@@ -36,7 +31,7 @@ class TaskController@Inject constructor(
                     )
                 }
             }
-        }*/
+        }
     }
 
     override suspend fun acceptTask(task: Task) {

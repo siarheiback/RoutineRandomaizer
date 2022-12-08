@@ -5,8 +5,7 @@ import com.finmanager.routinerandomaizer.domain.models.Task
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.Test
-
-
+import javax.inject.Inject
 
 
 /**
@@ -15,22 +14,44 @@ import org.junit.jupiter.api.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
-
+    @Inject lateinit var randomizer: Randomizer
     private val taskList = listOf<Task>(
-        Task(0, "1", "1"),
-        Task(1, "1", "1"),
-        Task(2, "1", "0"),
-        Task(4, "1", "0"),
-        Task(5, "1", "0"),
-        Task(6, "1", "0"),
-        Task(7, "1", "1")
+        Task(0, "1", "1",
+            isSleeping = false,
+            isActive = false,
+            period = 1,
+            sleepDate = null,
+            wakeUpDate = null
+        ),
+        Task(1, "1", "1",
+            isSleeping = false,
+            isActive = false,
+            period = 1,
+            sleepDate = null,
+            wakeUpDate = null
+        ),
+        Task(2, "1", "1",
+            isSleeping = false,
+            isActive = false,
+            period = 1,
+            sleepDate = null,
+            wakeUpDate = null
+        ),
+        Task(3, "1", "1",
+            isSleeping = false,
+            isActive = false,
+            period = 1,
+            sleepDate = null,
+            wakeUpDate = null
+        )
+
     )
 
     @Test
     fun fullActiveTasksList() {
             // Context of the app under test.
 
-                val isFull = runBlocking { Randomizer().isListFull(taskList) }
+                val isFull = runBlocking { randomizer.isListFull(taskList) }
                 assertEquals(isFull, false)
     }
 
@@ -38,7 +59,7 @@ class ExampleUnitTest {
     fun nullTasksList() {
         // Context of the app under test.
 
-        val isFull = runBlocking { Randomizer().isListFull(null) }
+        val isFull = runBlocking { randomizer.isListFull(null) }
         assertEquals(isFull, false)
     }
 
@@ -46,7 +67,7 @@ class ExampleUnitTest {
     fun getNoTask() {
         // Context of the app under test.
         val testTask = TaskState.NoTasks
-        val task = runBlocking { Randomizer().getRandomTask(null) }
+        val task = runBlocking { randomizer.getRandomTask(null) }
         assertEquals(task, testTask)
     }
 
@@ -55,7 +76,7 @@ class ExampleUnitTest {
     fun getTooMuchTasks() {
         // Context of the app under test.
         val testTask = TaskState.TooMuch
-        val task = runBlocking { Randomizer().getRandomTask(taskList) }
+        val task = runBlocking { randomizer.getRandomTask(taskList) }
         assertEquals(task, testTask)
     }
 }

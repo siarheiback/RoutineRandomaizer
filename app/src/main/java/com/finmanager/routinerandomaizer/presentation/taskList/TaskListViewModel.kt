@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.finmanager.routinerandomaizer.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.usecase.CreateNewTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.DeleteTaskUseCase
@@ -20,6 +21,8 @@ class TaskListViewModel @Inject constructor(
     private val deleteTask: DeleteTaskUseCase,
 ): ViewModel() {
 
+    private var _state = MutableLiveData<Boolean>()
+    val state: LiveData<Boolean> = _state
 
     val readAllData = LoadTasksList.execute()
 
@@ -33,5 +36,25 @@ class TaskListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO){
             deleteTask.execute(task)
         }
+    }
+
+
+    fun create1000sleepingTasks(){
+        viewModelScope.launch(Dispatchers.IO){
+            _state.postValue(true)
+            for (i in 1..1000){
+                createNewTask.execute(
+                    Task(0, "1", "1",
+                        isSleeping = true,
+                        isActive = false,
+                        period = 1,
+                        sleepDate = "06.12.2022",
+                        wakeUpDate = "07.12.2022"
+                    )
+                )
+            }
+            _state.postValue(false)
+        }
+
     }
 }

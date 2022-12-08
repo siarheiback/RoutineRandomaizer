@@ -14,7 +14,6 @@ class CompleteTaskUseCase @Inject constructor(
 ) {
 
 
-
     suspend fun execute(task: Task){
         repository.completeTask(
             Task(
@@ -24,10 +23,8 @@ class CompleteTaskUseCase @Inject constructor(
                 isSleeping = true,
                 period = task.period,
                 sleepDate = dateUtil.now(),
-                wakeUpDate = null
+                wakeUpDate = dateUtil.getWakeUpDate(task)
             )
         )
-
     }
-
 }

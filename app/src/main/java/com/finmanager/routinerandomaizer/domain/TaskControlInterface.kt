@@ -10,7 +10,6 @@ interface TaskControlInterface {
 
     fun declineTask()
 
-
     suspend fun completeTask(task: Task)
 
 

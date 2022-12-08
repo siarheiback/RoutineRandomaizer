@@ -63,4 +63,12 @@ class UseCases {
     ): CompleteTaskUseCase {
         return CompleteTaskUseCase(repository, dateUtil)
     }
+
+    @Provides
+    @ViewModelScoped
+    fun  provideWakeUpUseCase(
+        repository: TaskControlInterface,
+    ): WakeUpUseCase {
+        return WakeUpUseCase(repository)
+    }
 }

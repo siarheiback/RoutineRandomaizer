@@ -8,10 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finmanager.routinerandomaizer.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
-import com.finmanager.routinerandomaizer.domain.usecase.AcceptTaskUseCase
-import com.finmanager.routinerandomaizer.domain.usecase.CompleteTaskUseCase
-import com.finmanager.routinerandomaizer.domain.usecase.GetRandomTaskUseCase
-import com.finmanager.routinerandomaizer.domain.usecase.LoadTasksListUseCase
+import com.finmanager.routinerandomaizer.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +19,9 @@ class MainViewModel @Inject constructor(
     private val GetRandomTask: GetRandomTaskUseCase,
     private val LoadTasksList: LoadTasksListUseCase,
     private val AcceptTask: AcceptTaskUseCase,
-    private val CompleteTask: CompleteTaskUseCase
+    private val CompleteTask: CompleteTaskUseCase,
+    private val WakeUpUseCase: WakeUpUseCase
+
 ) : ViewModel() {
 
     private var _state = MutableLiveData<TaskState>()
@@ -32,6 +31,12 @@ class MainViewModel @Inject constructor(
     val randomTask: LiveData<TaskState?> = _randomTask
 
     var taskList = LoadTasksList.execute()
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            WakeUpUseCase.execute(taskList.value)
+        }
+    }
 
     fun getTask(list: List<Task>) {
         viewModelScope.launch(Dispatchers.IO) {
