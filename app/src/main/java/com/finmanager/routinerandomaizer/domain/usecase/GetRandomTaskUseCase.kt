@@ -1,6 +1,6 @@
 package com.finmanager.routinerandomaizer.domain.usecase
 
-import com.finmanager.routinerandomaizer.TaskState
+import com.finmanager.routinerandomaizer.domain.models.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import javax.inject.Inject

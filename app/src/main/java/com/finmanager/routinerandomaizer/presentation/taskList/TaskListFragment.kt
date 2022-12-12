@@ -61,18 +61,21 @@ class TaskListFragment : Fragment() {
         }
 
         binding.AddNewTaskBtn.setOnClickListener(){
-            viewModel.create1000sleepingTasks()
-//            viewModel.newTask(
-//                Task(id = 0,
-//                    name = binding.NewTaskText.text.toString(),
-//                    description = null,
-//                    isSleeping = false,
-//                    isActive = false,
-//                    period = 1,
-//                    sleepDate = null,
-//                    wakeUpDate = null)
-//            )
-            binding.NewTaskText.text = null
+            if (binding.NewTaskText.text.isNullOrEmpty()){
+                Toast.makeText(requireContext(),R.string.EmptyTask,Toast.LENGTH_SHORT).show()
+            }else{
+                viewModel.newTask(
+                    Task(id = 0,
+                        name = binding.NewTaskText.text.toString(),
+                        description = null,
+                        isSleeping = false,
+                        isActive = false,
+                        period = 1,
+                        sleepDate = null,
+                        wakeUpDate = null)
+                )
+                binding.NewTaskText.text = null
+            }
         }
     }
 

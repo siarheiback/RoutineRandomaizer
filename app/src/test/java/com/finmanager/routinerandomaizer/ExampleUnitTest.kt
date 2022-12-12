@@ -2,6 +2,7 @@ package com.finmanager.routinerandomaizer
 
 import com.finmanager.routinerandomaizer.data.Randomizer
 import com.finmanager.routinerandomaizer.domain.models.Task
+import com.finmanager.routinerandomaizer.domain.models.TaskState
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.*
 import org.junit.jupiter.api.Test

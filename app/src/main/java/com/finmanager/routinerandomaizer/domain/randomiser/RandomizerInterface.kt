@@ -1,6 +1,6 @@
 package com.finmanager.routinerandomaizer.domain.randomiser
 
-import com.finmanager.routinerandomaizer.TaskState
+import com.finmanager.routinerandomaizer.domain.models.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
 
 interface RandomizerInterface {
@@ -9,5 +9,5 @@ interface RandomizerInterface {
 
     suspend fun isListFull(list:List<Task>?):Boolean?
 
-    suspend fun getRandomTask(list: List<Task>?):TaskState
+    suspend fun getRandomTask(list: List<Task>?): TaskState
 }

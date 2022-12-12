@@ -14,7 +14,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/example"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="20sp"
@@ -47,10 +49,11 @@
 
     <ImageButton
         android:id="@+id/editButton"
-        android:background="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/deleteButton"
         app:layout_constraintEnd_toStartOf="@+id/deleteButton"
         app:layout_constraintTop_toTopOf="@+id/deleteButton"
@@ -60,19 +63,6 @@
         android:id="@+id/buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="editButton,deleteButton" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:constraint_referenced_ids="deleteButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

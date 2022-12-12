@@ -1,8 +1,7 @@
 package com.finmanager.routinerandomaizer.data
 
 import android.content.Context
-import com.finmanager.routinerandomaizer.R
-import com.finmanager.routinerandomaizer.TaskState
+import com.finmanager.routinerandomaizer.domain.models.TaskState
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
 import com.finmanager.routinerandomaizer.domain.models.Task
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -20,7 +19,7 @@ class Randomizer@Inject constructor(
        }
    }
 
-   override suspend fun getRandomTask(list: List<Task>?):TaskState{
+   override suspend fun getRandomTask(list: List<Task>?): TaskState {
        val activeTasks = list?.asSequence()
            ?.filter { !it.isSleeping }
            ?.filter { !it.isActive }

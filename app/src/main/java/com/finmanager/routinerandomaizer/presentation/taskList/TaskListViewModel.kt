@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.finmanager.routinerandomaizer.TaskState
 import com.finmanager.routinerandomaizer.domain.models.Task
 import com.finmanager.routinerandomaizer.domain.usecase.CreateNewTaskUseCase
 import com.finmanager.routinerandomaizer.domain.usecase.DeleteTaskUseCase
@@ -42,7 +41,7 @@ class TaskListViewModel @Inject constructor(
     fun create1000sleepingTasks(){
         viewModelScope.launch(Dispatchers.IO){
             _state.postValue(true)
-            for (i in 1..1000){
+            for (i in 1..10){
                 createNewTask.execute(
                     Task(0, "1", "1",
                         isSleeping = true,
@@ -55,6 +54,5 @@ class TaskListViewModel @Inject constructor(
             }
             _state.postValue(false)
         }
-
     }
 }

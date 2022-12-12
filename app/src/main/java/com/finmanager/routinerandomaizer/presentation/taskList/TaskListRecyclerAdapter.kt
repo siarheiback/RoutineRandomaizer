@@ -32,20 +32,18 @@ class TaskListRecyclerAdapter @Inject constructor(
 
 
         class ViewHolder(private val binding: TaskCardBinding) : RecyclerView.ViewHolder(binding.root) {
-            @SuppressLint("ResourceAsColor")
+            @SuppressLint("ResourceAsColor", "SetTextI18n")
             fun setData(item:Task, id: Int){
                 binding.apply {
                     TaskName.text = item.name.toString()
-                    position.text = id.toString()
+                    position.text = (id+1).toString()
                     deleteButton.tag = item
                     editButton.tag = item
-                    textView.text = item.sleepDate.toString()
                     if(item.isActive||item.isSleeping){
-                        TaskBackground.setBackgroundColor(R.color.purple_200)
+                        TaskBackground.setBackgroundColor(R.color.mint)
                         buttons.visibility = View.GONE
                         itemView.tag = item
                     }
-
                 }
             }
         }
