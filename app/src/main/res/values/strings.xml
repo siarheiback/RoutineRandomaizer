@@ -13,6 +13,7 @@
     <string name="TooMushTasks">"У вас слишком много активных задач"</string>
     <string name="NoAds">"Реклама еще не готова"</string>
     <string name="EmptyTask">"Нельзя добавить пустую задачу"</string>
+    <string name="TaskControl">"Управление задачами"</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="deleteTask">Удалить</string>

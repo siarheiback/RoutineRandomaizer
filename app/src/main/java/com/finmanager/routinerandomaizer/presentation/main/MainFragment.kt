@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +43,7 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         initAdMob()
+        (activity as AppCompatActivity?)?.supportActionBar?.title = getString(R.string.title)
         return binding.root
     }
 
@@ -98,6 +100,8 @@ class MainFragment : Fragment() {
         viewModel.taskList.observe(viewLifecycleOwner){list->
             viewModel.wake(list)
             val activeTasksList = list.filter { it.isActive }
+
+
             adapter.differ.submitList(activeTasksList)
 
             binding.randomizeBtn.setOnClickListener(){

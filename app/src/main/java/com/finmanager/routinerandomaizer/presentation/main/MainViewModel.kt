@@ -93,6 +93,7 @@ class MainViewModel @Inject constructor(
             else -> {
                 view.visibility = View.GONE
                 text.text= "Получить задачу"
+                button.isClickable = true
             }
         }
     }
