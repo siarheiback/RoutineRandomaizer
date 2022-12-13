@@ -21,6 +21,6 @@ interface TasksDAO {
     fun readAllTasks(): LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks_database WHERE id=:id")
-    fun getLastTask(id:Int): LiveData<Task>
+    fun getLastTask(id:Int): Task
 
 }

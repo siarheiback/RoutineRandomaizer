@@ -115,6 +115,7 @@ class MainFragment : Fragment() {
                     })
                 } else {
                     Toast.makeText(requireContext(),getString(R.string.NoAds),Toast.LENGTH_SHORT).show()
+                    viewModel.setDefaultTask()
                 }
             }
         }

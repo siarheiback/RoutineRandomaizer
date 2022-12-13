@@ -21,9 +21,6 @@ class TasksRepository@Inject constructor(
     override suspend fun updateTask (task: Task){
         DAO.updateTask(task)
     }
-    override fun getLastTask(id: Int) {
-        DAO.getLastTask(id)
-    }
-
+    override fun getLastTask(id: Int) : Task = DAO.getLastTask(id)
 
 }

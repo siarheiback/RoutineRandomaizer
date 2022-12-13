@@ -8,5 +8,5 @@ interface TaskInterface {
     suspend fun addTask (task: Task)
     suspend fun deleteTask (task: Task)
     suspend fun updateTask (task: Task)
-    fun getLastTask (id: Int)
+    fun getLastTask (id: Int) : Task
 }

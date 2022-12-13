@@ -36,7 +36,7 @@ class DateUtil@Inject constructor(
     }
 
     override fun toWake(task: Task):Boolean{
-        return if (task.wakeUpDate!=null) {task.wakeUpDate.convertToDate() < now().convertToDate()}
+        return if (task.wakeUpDate!=null) {task.wakeUpDate.convertToDate() <= now().convertToDate()}
         else{false}
 
     }
