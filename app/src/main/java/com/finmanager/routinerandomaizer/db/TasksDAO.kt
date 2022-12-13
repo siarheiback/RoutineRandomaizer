@@ -20,4 +20,7 @@ interface TasksDAO {
     @Query("SELECT * FROM tasks_database ORDER BY id ASC")
     fun readAllTasks(): LiveData<List<Task>>
 
+    @Query("SELECT * FROM tasks_database WHERE id=:id")
+    fun getLastTask(id:Int): LiveData<Task>
+
 }

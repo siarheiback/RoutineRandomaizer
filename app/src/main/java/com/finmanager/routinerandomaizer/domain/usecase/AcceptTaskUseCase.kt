@@ -9,8 +9,6 @@ class AcceptTaskUseCase@Inject constructor(
 ) {
 
     suspend fun execute(task: TaskState){
-
         TaskController.acceptTask(task.getTask())
-
     }
 }

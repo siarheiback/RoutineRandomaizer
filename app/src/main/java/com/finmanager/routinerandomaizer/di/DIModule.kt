@@ -2,6 +2,8 @@ package com.finmanager.routinerandomaizer.di
 
 import android.content.Context
 import androidx.room.Room
+import com.finmanager.routinerandomaizer.ReturnRandomizedTask
+import com.finmanager.routinerandomaizer.ReturnTask
 import com.finmanager.routinerandomaizer.data.DateUtil
 import com.finmanager.routinerandomaizer.data.DateUtilInterface
 import com.finmanager.routinerandomaizer.data.Randomizer
@@ -59,6 +61,11 @@ abstract class DIModule {
         TaskImpl: TasksRepository
     ): TaskInterface
 
+    @Binds
+    @ViewModelScoped
+    abstract fun bindsReturnTask(
+        TaskImpl: ReturnRandomizedTask
+    ): ReturnTask
 }
 
 @InstallIn(SingletonComponent::class)

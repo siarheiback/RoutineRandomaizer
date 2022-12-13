@@ -23,8 +23,8 @@ class MainViewModel @Inject constructor(
     private val LoadTasksList: LoadTasksListUseCase,
     private val AcceptTask: AcceptTaskUseCase,
     private val CompleteTask: CompleteTaskUseCase,
-    private val WakeUpUseCase: WakeUpUseCase
-
+    private val WakeUpUseCase: WakeUpUseCase,
+    private val GetLastTaskUseCase:GetLastTaskUseCase
 ) : ViewModel() {
 
     private var _state = MutableLiveData<Boolean>()
@@ -36,7 +36,7 @@ class MainViewModel @Inject constructor(
     var taskList = LoadTasksList.execute()
 
     init {
-
+        
     }
 
     fun setDefaultTask(){

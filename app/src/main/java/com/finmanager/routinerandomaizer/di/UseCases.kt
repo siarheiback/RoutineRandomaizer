@@ -1,5 +1,6 @@
 package com.finmanager.routinerandomaizer.di
 
+import com.finmanager.routinerandomaizer.ReturnTask
 import com.finmanager.routinerandomaizer.data.DateUtilInterface
 import com.finmanager.routinerandomaizer.domain.TaskControlInterface
 import com.finmanager.routinerandomaizer.domain.randomiser.RandomizerInterface
@@ -70,5 +71,14 @@ class UseCases {
         repository: TaskControlInterface,
     ): WakeUpUseCase {
         return WakeUpUseCase(repository)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun  provideGetLastTaskUseCase(
+        task: TaskInterface,
+        returnTask: ReturnTask
+    ): GetLastTaskUseCase {
+        return GetLastTaskUseCase(task, returnTask)
     }
 }
