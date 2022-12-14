@@ -40,6 +40,7 @@ class CurrentTasksRecyclerAdapter (
                 CurrentTaskName.text = item.name.toString()
                 itemView.tag = item
                 checkBox.tag = item
+                checkBox.isChecked = false
             }
         }
     }

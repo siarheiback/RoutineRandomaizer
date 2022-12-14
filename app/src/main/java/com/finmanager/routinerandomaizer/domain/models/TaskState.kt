@@ -43,7 +43,7 @@ sealed class TaskState{
             }
             is TooMuch -> {
                 Task(id = 0,
-                    name = "Слишком много активынх задач",
+                    name = "Слишком много активных задач",
                     description = null,
                     isSleeping = false,
                     period = 1,
