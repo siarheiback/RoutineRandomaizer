@@ -18,7 +18,7 @@ After the sleep time expires, the task is automatically switched to the active m
 
 ## Screenshots
 
-![App Screenshot](https://yapx.ru/album/VLWB3)
-![App Screenshot](https://yapx.ru/album/VLWFQ)
-![App Screenshot](https://yapx.ru/album/VLWJG)
+![Main page](https://yapx.ru/album/VLWB3)
+![Add new task](https://yapx.ru/album/VLWFQ)
+![Get random task](https://yapx.ru/album/VLWJG)
 
