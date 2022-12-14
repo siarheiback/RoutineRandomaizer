@@ -1,5 +1,5 @@
 
-# Project Title
+# Routine Randomizer
 
 The main task of the application is to issue random tasks from a list pre-created by the user.
 At the moment, the user can add an unlimited number of tasks. The maximum number of characters is 45. The main screen displays a button for getting a task, as well as current tasks (if they exist).
